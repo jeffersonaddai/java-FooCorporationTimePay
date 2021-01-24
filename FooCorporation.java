@@ -8,27 +8,36 @@ public class FooCorporation {
         printTotalPay(10, 73);
     }
     public static void printTotalPay(double basePay, double hoursWorked){
+        double normalTime = 40;
+        double maximumWorkingTime = 60;
+        double overTimeBonus = 1.5;
+        double minimumWage = 8;
+        
+        double overTime = hoursWorked - normalTime;
+        
         double normalTimePay;
         double overTimePay;
         double totalTimePay;
-        if (basePay < 8){
-            System.out.println("Error: base pay must not be less than the minimum wage ($8 an hour)");
-        }
         
-        else if (hoursWorked > 60){
-            System.out.println("Error: number of hours worked must not be more than 60");
+
+        //test if basePay is not less than the minimum wage or the hours worked is not greater than 60
+        if ((basePay < minimumWage) || (hoursWorked > maximumWorkingTime)){
+            if (basePay < minimumWage){
+                System.out.println("Error: base pay must not be less than the minimum wage ($8 an hour)");
+            }
+            if (hoursWorked > maximumWorkingTime){
+                System.out.println("Error: number of hours worked must not be more than 60");
+            }
         }
-        
-        else if (hoursWorked <= 40){
-            normalTimePay = hoursWorked * basePay;
-            overTimePay = 0;
-            totalTimePay = normalTimePay + overTimePay;
-            System.out.println("Total time pay is " + "$" + totalTimePay);
-        }
-        
-        else if ((hoursWorked > 40) && (hoursWorked <= 60)){
-            normalTimePay = 40 * basePay;
-            overTimePay = (hoursWorked - 40) * basePay * 1.5;
+
+        else {
+            // if hours worked is less than or equal to normalTime the normalTimePay is hoursWorked * basePay
+            //however if its not then normalTimePay is normalTime * basePay
+            normalTimePay = hoursWorked <= normalTime ? hoursWorked * basePay : normalTime * basePay;
+
+            // if hours worked is less than or equal to normalTime the overTimePay is 0
+            // however if its not then overTimePay is overtime * basePay * overTimeBonus
+            overTimePay = hoursWorked <= normalTime ? 0 : overTime * basePay * overTimeBonus;
             totalTimePay = normalTimePay + overTimePay;
             System.out.println("Total time pay is " + "$" + totalTimePay);
         }

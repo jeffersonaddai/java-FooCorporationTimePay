@@ -14,20 +14,23 @@ public class FooCorporation {
         if (basePay < 8){
             System.out.println("Error: base pay must not be less than the minimum wage ($8 an hour)");
         }
+        
+        else if (hoursWorked > 60){
+            System.out.println("Error: number of hours worked must not be more than 60");
+        }
+        
         else if (hoursWorked <= 40){
             normalTimePay = hoursWorked * basePay;
             overTimePay = 0;
             totalTimePay = normalTimePay + overTimePay;
             System.out.println("Total time pay is " + "$" + totalTimePay);
         }
+        
         else if ((hoursWorked > 40) && (hoursWorked <= 60)){
             normalTimePay = 40 * basePay;
             overTimePay = (hoursWorked - 40) * basePay * 1.5;
             totalTimePay = normalTimePay + overTimePay;
             System.out.println("Total time pay is " + "$" + totalTimePay);
-        }
-        else if (hoursWorked > 60){
-            System.out.println("Error: number of hours worked must not be more than 60");
         }
     }
 }
